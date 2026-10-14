@@ -1,0 +1,8 @@
+{
+  "name": "little-frames",
+  "compatibility_date": "2026-10-14",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page"
+  }
+}

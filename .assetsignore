@@ -1,0 +1,10 @@
+# Only browser assets belong in the deployment. Everything else stays local.
+*
+!index.html
+!style.css
+!app.js
+!core.js
+!assets/
+!assets/icon.svg
+!assets/caveat.ttf
+!assets/OFL.txt

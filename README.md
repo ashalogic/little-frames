@@ -6,8 +6,8 @@ Two or three instant-style mini prints on one **15 × 10 cm landscape sheet**. A
 
 ## Use it
 
-1. Run `npm start` (Node.js 18 or newer), or double-click `start-windows.bat` on Windows.
-2. Open `http://127.0.0.1:4173`.
+1. Open the deployed website, or preview locally with `npx wrangler dev`.
+2. For local preview, open the URL printed by Wrangler (usually `http://localhost:8787`).
 3. Pick a two- or three-photo layout. Click or drop a photo into each frame.
 4. Drag to adjust the crop. Select a frame to zoom, rotate, replace or remove its photo. Arrow keys move the selected photo; Shift + arrow moves farther.
 5. Edit each caption, or choose random, unique captions from the original ten-note collection.
@@ -36,7 +36,37 @@ Supported files: JPG, PNG and WebP. Convert HEIC to JPG first. Transparency is f
 
 Plain HTML, CSS, JavaScript, and the browser Canvas API. One bundled, open-license handwriting font. The PNG exporter inserts a standards-compliant `pHYs` density chunk without altering the compressed image data. No build step, backend, database, or npm packages.
 
-Serve the root folder with any static web host. `server.mjs` is a small local preview server bound to loopback; it is not intended as a public production server.
+The app is flat, static files in the repository root. There is no Node.js server or Worker script. Node.js is only a development tool for running tests or Cloudflare's Wrangler CLI; the deployed app runs entirely in the browser.
+
+## Deploy to Cloudflare Workers
+
+`wrangler.jsonc` configures a static-assets-only Worker. No build, install step, environment variables, bindings, or `nodejs_compat` flag are required. `.assetsignore` allows only the HTML, CSS, browser JavaScript, icon, font and font license to be uploaded; repository metadata, tests and tooling are excluded.
+
+### Connect this GitHub repository
+
+In Cloudflare **Workers & Pages**, create a Worker and connect this repository:
+
+| Setting | Value |
+| --- | --- |
+| Root directory | Repository root |
+| Build command | Leave empty |
+| Deploy command | `npx wrangler deploy` |
+| Production branch | `main` |
+
+Cloudflare serves the root `index.html` and all browser assets directly. Photo editing and PNG export stay on the visitor's device.
+
+### Deploy from your computer
+
+Install a current Node.js LTS release to use the CLI, then run:
+
+```sh
+npx wrangler login
+npx wrangler deploy
+```
+
+Wrangler prints the deployed URL. For a local preview use `npx wrangler dev`. There is no `npm install` or build command to run for this application; `npx` obtains Wrangler as deployment tooling.
+
+Configuration follows [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/) and [asset exclusion rules](https://developers.cloudflare.com/workers/static-assets/binding/#ignoring-assets).
 
 ## Checks
 

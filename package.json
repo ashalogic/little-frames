@@ -6,7 +6,8 @@
   "description": "A tiny, private photo print studio. Two or three instant-style keepsakes, one lossless PNG.",
   "scripts": {
     "test": "node --test tests/core.test.js",
-    "start": "node server.mjs"
+    "dev": "npx wrangler dev",
+    "deploy": "npx wrangler deploy"
   },
   "license": "MIT"
 }
