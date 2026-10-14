@@ -1,81 +1,20 @@
-# Little Frames
+<p align="center">
+  <img src="assets/icon.svg" width="80" height="80" alt="Little Frames icon">
+</p>
+<h1 align="center">Little Frames</h1>
+<p align="center">Small prints, lovely memories.</p>
 
-A tiny photo print studio for memories you'd rather hold than scroll past.
+Create two or three instant-style photo prints on one **15 × 10 cm sheet**. Add photos, drag, zoom, rotate, and write handwritten captions. Export a **3543 × 2362 lossless PNG at 600 DPI**.
 
-Two or three instant-style mini prints on one **15 × 10 cm landscape sheet**. Add photos, drag to position, zoom, rotate, and write a little note. Download a **3543 × 2362 lossless PNG with 600 DPI metadata**.
+Everything stays on your device. No uploads, accounts, filters, or runtime dependencies. Plain HTML, CSS and JavaScript.
 
-## Use it
+## Use & deploy
 
-1. Open the deployed website, or preview locally with `npx wrangler dev`.
-2. For local preview, open the URL printed by Wrangler (usually `http://localhost:8787`).
-3. Pick a two- or three-photo layout. Click or drop a photo into each frame.
-4. Drag to adjust the crop. Select a frame to zoom, rotate, replace or remove its photo. Arrow keys move the selected photo; Shift + arrow moves farther.
-5. Edit each caption, or choose random, unique captions from the original ten-note collection.
-6. Save the PNG. Print at **100% / actual size** on **15 × 10 cm** paper. Disable automatic photo enhancement and borderless enlargement.
+- **Preview:** `npx wrangler dev`
+- **Deploy:** `npx wrangler login`, then `npx wrangler deploy`
+- **Cloudflare Git integration:** repository root, empty build command, deploy command `npx wrangler deploy`.
+- **Tests:** `npm test`
 
-Your photos stay in memory on your device. There are no uploads, accounts, analytics, external font calls, or runtime dependencies. Closing or reloading the page clears your session; the browser warns before leaving when photos are loaded. Switching layouts preserves all three photos until you remove them or start fresh.
+Print at **100% / actual size** on **15 × 10 cm** paper. PNG compression is lossless; resizing resamples pixels.
 
-## Layouts
-
-| Layout | Card size | Minimum outside margin | Cutting gap |
-| --- | --- | --- | --- |
-| Two photos | 62 × 86 mm | 7 mm | 8 mm |
-| Three photos | 42 × 62 mm | 6 mm | 6 mm |
-
-Cards have white borders, larger caption bottoms, and optional fine cutting outlines. These are instant-style keepsakes, not a claim to match a film manufacturer's dimensions. The smaller three-photo cards fit side by side without compromising the cutting space.
-
-## Quality
-
-PNG compression is lossless. The original decoded photo is used directly for the final export; the small preview is never used as an export source. Moving, zooming and rotating only affect framing. No filters, AI editing, sharpening or beautification are applied.
-
-Resizing necessarily resamples pixels; a 600 DPI sheet cannot invent detail absent from the source photo. Browser image decoding and color handling can vary; this is an sRGB-oriented web workflow, not a calibrated color-management application. Pixel counts are the nearest whole pixels for 15 × 10 cm at 600 DPI (the rounding difference is below 0.02 mm).
-
-Supported files: JPG, PNG and WebP. Convert HEIC to JPG first. Transparency is flattened onto white. Printed size ultimately depends on printer settings.
-
-## Stack
-
-Plain HTML, CSS, JavaScript, and the browser Canvas API. One bundled, open-license handwriting font. The PNG exporter inserts a standards-compliant `pHYs` density chunk without altering the compressed image data. No build step, backend, database, or npm packages.
-
-The app is flat, static files in the repository root. There is no Node.js server or Worker script. Node.js is only a development tool for running tests or Cloudflare's Wrangler CLI; the deployed app runs entirely in the browser.
-
-## Deploy to Cloudflare Workers
-
-`wrangler.jsonc` configures a static-assets-only Worker. No build, install step, environment variables, bindings, or `nodejs_compat` flag are required. `.assetsignore` allows only the HTML, CSS, browser JavaScript, icon, font and font license to be uploaded; repository metadata, tests and tooling are excluded.
-
-### Connect this GitHub repository
-
-In Cloudflare **Workers & Pages**, create a Worker and connect this repository:
-
-| Setting | Value |
-| --- | --- |
-| Root directory | Repository root |
-| Build command | Leave empty |
-| Deploy command | `npx wrangler deploy` |
-| Production branch | `main` |
-
-Cloudflare serves the root `index.html` and all browser assets directly. Photo editing and PNG export stay on the visitor's device.
-
-### Deploy from your computer
-
-Install a current Node.js LTS release to use the CLI, then run:
-
-```sh
-npx wrangler login
-npx wrangler deploy
-```
-
-Wrangler prints the deployed URL. For a local preview use `npx wrangler dev`. There is no `npm install` or build command to run for this application; `npx` obtains Wrangler as deployment tooling.
-
-Configuration follows [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/) and [asset exclusion rules](https://developers.cloudflare.com/workers/static-assets/binding/#ignoring-assets).
-
-## Checks
-
-```sh
-npm test
-```
-
-Tests cover physical margins, both templates, rotation-aware crop coverage, unique captions, and PNG density metadata/CRC while preserving image bytes.
-
-## Credits & license
-
-Code and hand-drawn SVG photo icon: MIT. Caveat font: [SIL Open Font License 1.1](assets/OFL.txt), bundled from [Google Fonts](https://github.com/google/fonts/tree/main/ofl/caveat).
+[MIT license](LICENSE) · [Caveat font license](assets/OFL.txt)
