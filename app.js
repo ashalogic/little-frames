@@ -207,7 +207,8 @@ function buildFrames() {
     });
     host.append(button);
   });
-  $('#frame-size').textContent = state.count === 2 ? 'two 62 × 86 mm keepsakes' : 'three 42 × 62 mm keepsakes';
+  const cardWidth = layout(state.count)[0].width;
+  $('#frame-size').textContent = `${state.count === 2 ? 'two' : 'three'} ${cardWidth.toFixed(1)} × 90 mm keepsakes`;
   updateControls(); render();
 }
 

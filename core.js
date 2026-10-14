@@ -7,9 +7,14 @@ export const CAPTIONS = Object.freeze([
 ]);
 
 export function layout(count) {
-  if (count === 2) return [9, 79].map(x => ({ x, y: 7, width: 62, height: 86, inset: 4, imageWidth: 54, imageHeight: 72 }));
-  if (count === 3) return [6, 54, 102].map(x => ({ x, y: 19, width: 42, height: 62, inset: 4, imageWidth: 34, imageHeight: 34 * 4 / 3 }));
-  throw new RangeError('Choose two or three photos.');
+  if (count !== 2 && count !== 3) throw new RangeError('Choose two or three photos.');
+  const margin = 5;
+  const gap = 5;
+  const width = (SHEET.widthMM - margin * 2 - gap * (count - 1)) / count;
+  return Array.from({ length: count }, (_, index) => ({
+    x: margin + index * (width + gap), y: margin,
+    width, height: 90, inset: 3, imageWidth: width - 6, imageHeight: 76,
+  }));
 }
 
 export const clamp = (value, min = -1, max = 1) => Math.max(min, Math.min(max, value));
