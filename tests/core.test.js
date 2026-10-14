@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { SHEET, layout, photoGeometry, randomCaptions, crc32, withPngDpi } from '../core.js';
 
-test('compact templates fill the sheet with at least 5 mm margins and cutting gaps', () => {
+test('compact templates fill the sheet with 5 mm margins and 3 mm cutting gaps', () => {
   for (const count of [2, 3]) {
     const cards = layout(count);
     assert.equal(cards.length, count);
@@ -14,7 +14,7 @@ test('compact templates fill the sheet with at least 5 mm margins and cutting ga
       assert.equal(card.inset, count === 3 ? 2 : 3);
       assert.ok(card.height - card.inset - card.imageHeight >= 8);
       assert.ok(card.height - card.inset - card.imageHeight > card.inset);
-      if (index) assert.ok(card.x - (cards[index - 1].x + cards[index - 1].width) >= 5 - 1e-9);
+      if (index) assert.ok(Math.abs(card.x - (cards[index - 1].x + cards[index - 1].width) - 3) < 1e-9);
     });
     assert.ok(Math.abs(cards.at(-1).x + cards.at(-1).width - 145) < 1e-9);
   }
