@@ -10,10 +10,11 @@ export function layout(count) {
   if (count !== 2 && count !== 3) throw new RangeError('Choose two or three photos.');
   const margin = 5;
   const gap = 5;
+  const inset = count === 3 ? 2 : 3;
   const width = (SHEET.widthMM - margin * 2 - gap * (count - 1)) / count;
   return Array.from({ length: count }, (_, index) => ({
     x: margin + index * (width + gap), y: margin,
-    width, height: 90, inset: 3, imageWidth: width - 6, imageHeight: 76,
+    width, height: 90, inset, imageWidth: width - inset * 2, imageHeight: count === 3 ? 80 : 76,
   }));
 }
 

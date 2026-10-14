@@ -11,7 +11,8 @@ test('compact templates fill the sheet with at least 5 mm margins and cutting ga
       assert.ok(card.x + card.width <= 145 + 1e-9 && card.y + card.height <= 95);
       assert.equal(card.y, 5);
       assert.equal(card.height, 90);
-      assert.equal(card.inset, 3);
+      assert.equal(card.inset, count === 3 ? 2 : 3);
+      assert.ok(card.height - card.inset - card.imageHeight >= 8);
       assert.ok(card.height - card.inset - card.imageHeight > card.inset);
       if (index) assert.ok(card.x - (cards[index - 1].x + cards[index - 1].width) >= 5 - 1e-9);
     });
