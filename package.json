@@ -1,0 +1,12 @@
+{
+  "name": "little-frames",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A tiny, private photo print studio. Two or three instant-style keepsakes, one lossless PNG.",
+  "scripts": {
+    "test": "node --test tests/core.test.js",
+    "start": "node server.mjs"
+  },
+  "license": "MIT"
+}
