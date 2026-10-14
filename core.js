@@ -9,7 +9,7 @@ export const CAPTIONS = Object.freeze([
 export function layout(count) {
   if (count !== 2 && count !== 3) throw new RangeError('Choose two or three photos.');
   const margin = 5;
-  const gap = 3;
+  const gap = 2;
   const inset = count === 3 ? 2 : 3;
   const width = (SHEET.widthMM - margin * 2 - gap * (count - 1)) / count;
   return Array.from({ length: count }, (_, index) => ({

@@ -8,7 +8,7 @@ Create two or three instant-style photo prints on one **15 × 10 cm sheet**. Add
 
 Everything stays on your device. No uploads, accounts, filters, or runtime dependencies. Plain HTML, CSS and JavaScript.
 
-Compact layouts use slim borders (2 mm for three photos), wider caption bottoms, 5 mm outer margins, and 3 mm cutting gaps. Three-photo sheets use taller crops; drag and zoom to frame your subject.
+Compact layouts use slim borders (2 mm for three photos), wider caption bottoms, 5 mm outer margins, and 2 mm cutting gaps. Three-photo sheets use taller crops; drag and zoom to frame your subject.
 
 ## Use & deploy
 
